@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Spawnpoint is an upcoming app for finding the exact place your story began."
+      data-i18n-content="metaDescription"
+    />
+    <title>Spawnpoint | Where did your story begin?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" aria-label="Top menu" data-i18n-aria-label="headerLabel">
+      <a class="brand" href="#top" aria-label="Spawnpoint home" data-i18n-aria-label="brandLabel">
+        <span class="brand-mark" aria-hidden="true">?</span>
+        <span>Spawnpoint</span>
+      </a>
+      <nav aria-label="Sections" data-i18n-aria-label="navLabel">
+        <a href="#intro" data-i18n="navIntro">Intro</a>
+        <a href="#soon" data-i18n="navSoon">Coming soon</a>
+        <a href="#signup" data-i18n="navSignup">Sign up</a>
+        <a href="#screens" data-i18n="navScreens">Screenshots</a>
+      </nav>
+      <div class="language-switch" role="group" aria-label="Language" data-i18n-aria-label="languageLabel">
+        <button class="is-active" type="button" data-lang-option="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang-option="no" aria-pressed="false">NO</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img
+          class="hero-media"
+          src="assets/images/spawnpoint-hero.jpg"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="kicker" data-i18n="heroKicker">A tiny quest about where everything began</p>
+          <h1 id="hero-title">Spawnpoint</h1>
+          <p class="hero-copy" data-i18n="heroCopy">
+            Find the place where your story began. Not just the date. Not just
+            the city. The exact point on the map.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions" data-i18n-aria-label="heroActionsLabel">
+            <a class="button primary" href="#signup" data-i18n="heroPrimary">Sign up for updates</a>
+            <a class="button secondary" href="#intro" data-i18n="heroSecondary">See the idea</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro-section" id="intro" aria-labelledby="intro-title">
+        <div class="section-copy">
+          <p class="section-label" data-i18n="introLabel">Spawn point intro</p>
+          <h2 id="intro-title" data-i18n="introTitle">Everyone has a starting point.</h2>
+          <p data-i18n="introCopy">
+            Spawnpoint is an upcoming app for making origin stories a little
+            more playful, personal, and concrete. You add what you know, find
+            the point on the map, and build a small digital marker for the
+            place where your story began.
+          </p>
+        </div>
+        <div class="signal-grid" aria-label="Core ideas" data-i18n-aria-label="ideasLabel">
+          <article>
+            <span>01</span>
+            <h3 data-i18n="ideaOneTitle">Find the point</h3>
+            <p data-i18n="ideaOneCopy">From city, hospital, address, or family story to one exact place.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3 data-i18n="ideaTwoTitle">Make it personal</h3>
+            <p data-i18n="ideaTwoCopy">A small map memory with coordinates, notes, and just enough mystery.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3 data-i18n="ideaThreeTitle">Share when it fits</h3>
+            <p data-i18n="ideaThreeCopy">For yourself, your family, or the person who always asks where you are from.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="soon-section" id="soon" aria-labelledby="soon-title">
+        <div class="poster-stack" aria-hidden="true">
+          <img src="assets/images/spawnpoint-origin-poster.jpg" alt="" />
+          <img src="assets/images/spawnpoint-fast-poster.jpg" alt="" />
+        </div>
+        <div class="section-copy">
+          <p class="section-label" data-i18n="soonLabel">Coming soon</p>
+          <h2 id="soon-title" data-i18n="soonTitle">First the idea lands. Then the app.</h2>
+          <p data-i18n="soonCopy">
+            Right now Spawnpoint is being shaped around the simple feeling of
+            pointing at a map and saying: that is where I started. This page is
+            the project's first small basecamp while the app takes form.
+          </p>
+          <div class="status-row" aria-label="Project status" data-i18n-aria-label="statusLabel">
+            <span data-i18n="statusDesign">Design direction</span>
+            <span data-i18n="statusPrototype">Prototype</span>
+            <span data-i18n="statusWaitlist">Waitlist</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="signup-section" id="signup" aria-labelledby="signup-title">
+        <div class="signup-copy">
+          <p class="section-label" data-i18n="signupLabel">Sign up here</p>
+          <h2 id="signup-title" data-i18n="signupTitle">Want to know when Spawnpoint opens?</h2>
+          <p data-i18n="signupCopy">
+            The actual form comes next. For now, this space is reserved so the
+            design and message can settle before we connect the email flow.
+          </p>
+        </div>
+        <form class="signup-form" aria-label="Interest list coming soon" data-i18n-aria-label="formLabel">
+          <label for="email" data-i18n="emailLabel">Email</label>
+          <div class="input-row">
+            <input id="email" type="email" placeholder="deg@example.com" disabled />
+            <button type="button" disabled data-i18n="formButton">Coming soon</button>
+          </div>
+          <p data-i18n="formNote">No email is stored here yet.</p>
+        </form>
+      </section>
+
+      <section class="screens-section" id="screens" aria-labelledby="screens-title">
+        <div class="section-heading">
+          <p class="section-label" data-i18n="screensLabel">App screenshots</p>
+          <h2 id="screens-title" data-i18n="screensTitle">Screenshots coming soon.</h2>
+        </div>
+        <div class="phone-grid">
+          <article class="phone-mock">
+            <span data-i18n="phoneOneLabel">Map</span>
+            <strong data-i18n="phoneComingSoon">Coming soon</strong>
+          </article>
+          <article class="phone-mock">
+            <span data-i18n="phoneTwoLabel">Pin</span>
+            <strong data-i18n="phoneComingSoon">Coming soon</strong>
+          </article>
+          <article class="phone-mock">
+            <span data-i18n="phoneThreeLabel">Story</span>
+            <strong data-i18n="phoneComingSoon">Coming soon</strong>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Spawnpoint</span>
+      <a href="#top" data-i18n="footerTop">Back to top</a>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
