@@ -34,24 +34,27 @@ const translations = {
     soonTitle: "First the idea lands. Then the app.",
     soonCopy:
       "Right now Spawnpoint is being shaped around the simple feeling of pointing at a map and saying: that is where I started. This page is the project's first small basecamp while the app takes form.",
-    statusLabel: "Project status",
-    statusDesign: "Design direction",
-    statusPrototype: "Prototype",
-    statusWaitlist: "Waitlist",
+    statusLabel: "Waitlist",
+    statusWaitlist: "Join the waitlist",
     signupLabel: "Sign up here",
     signupTitle: "Want to know when Spawnpoint opens?",
     signupCopy:
-      "The actual form comes next. For now, this space is reserved so the design and message can settle before we connect the email flow.",
-    formLabel: "Interest list coming soon",
+      "Leave your email and I'll send the occasional update as the app takes shape.",
+    formLabel: "Interest list signup",
     emailLabel: "Email",
-    formButton: "Coming soon",
-    formNote: "No email is stored here yet.",
+    formButton: "Join waitlist",
+    formNote: "We'll only use your email for Spawnpoint updates.",
+    formSending: "Joining the waitlist...",
+    formSuccess: "You're on the Spawnpoint waitlist. Thanks for joining.",
+    formError:
+      "Couldn't reach the form service. Try again, or disable blockers for this page and retry.",
     screensLabel: "App screenshots",
     screensTitle: "Screenshots coming soon.",
     phoneOneLabel: "Map",
     phoneTwoLabel: "Pin",
     phoneThreeLabel: "Story",
     phoneComingSoon: "Coming soon",
+    pinPreviewAlt: "Red Spawnpoint pin centered on a voxel map",
     footerTop: "Back to top",
   },
   no: {
@@ -91,24 +94,27 @@ const translations = {
     soonTitle: "Først lander ideen. Så appen.",
     soonCopy:
       "Akkurat nå formes Spawnpoint rundt den enkle følelsen av å peke på et kart og si: der startet jeg. Nettsiden er første lille basecamp for prosjektet mens appen tar form.",
-    statusLabel: "Prosjektstatus",
-    statusDesign: "Designretning",
-    statusPrototype: "Prototype",
-    statusWaitlist: "Venteliste",
+    statusLabel: "Venteliste",
+    statusWaitlist: "Meld interesse",
     signupLabel: "Sign up here",
     signupTitle: "Vil du få vite når Spawnpoint åpner?",
     signupCopy:
-      "Selve skjemaet kommer i neste runde. Foreløpig holder vi av plassen, så designet og budskapet kan sitte før vi kobler på e-postflyten.",
-    formLabel: "Interesseliste kommer snart",
+      "Legg igjen e-postadressen din, så sender jeg en sjelden oppdatering mens appen tar form.",
+    formLabel: "Meld interesse",
     emailLabel: "E-post",
-    formButton: "Kommer snart",
-    formNote: "Ingen e-post lagres her ennå.",
+    formButton: "Meld interesse",
+    formNote: "E-posten brukes bare til Spawnpoint-oppdateringer.",
+    formSending: "Melder deg på interesselisten...",
+    formSuccess: "Du står på Spawnpoint-listen. Takk for at du meldte interesse.",
+    formError:
+      "Fikk ikke kontakt med skjematjenesten. Prøv igjen, eller slå av blokkeringer for denne siden og prøv på nytt.",
     screensLabel: "App skjermbilder",
     screensTitle: "Skjermbilder kommer snart.",
     phoneOneLabel: "Kart",
     phoneTwoLabel: "Pin",
     phoneThreeLabel: "Historie",
     phoneComingSoon: "Kommer snart",
+    pinPreviewAlt: "Rød Spawnpoint-pin sentrert på et voxel-kart",
     footerTop: "Til toppen",
   },
 };
@@ -151,11 +157,18 @@ function applyLanguage(language) {
     element.setAttribute("content", content[element.dataset.i18nContent]);
   });
 
+  document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+    element.setAttribute("alt", content[element.dataset.i18nAlt]);
+  });
+
   document.querySelectorAll("[data-lang-option]").forEach((button) => {
     const isActive = button.dataset.langOption === language;
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
+
+  const pageLanguageField = document.getElementById("pageLanguageField");
+  if (pageLanguageField) pageLanguageField.value = language;
 
   saveLanguage(language);
 }
@@ -165,3 +178,64 @@ document.querySelectorAll("[data-lang-option]").forEach((button) => {
 });
 
 applyLanguage(initialLanguage);
+
+(function setupWaitlistForm() {
+  const form = document.getElementById("waitlist-form");
+  const iframe = document.getElementById("formcarry_iframe");
+  const statusBox = document.getElementById("form-status");
+  const nextField = document.getElementById("nextField");
+  const landingUrlField = document.getElementById("landingUrlField");
+  const referrerField = document.getElementById("referrerField");
+
+  if (!form || !iframe || !statusBox) return;
+
+  if (nextField) nextField.value = `${window.location.origin}${window.location.pathname}?sent=1#signup`;
+  if (landingUrlField) landingUrlField.value = window.location.href;
+  if (referrerField) referrerField.value = document.referrer || "direct";
+
+  let pending = false;
+  let timer = null;
+
+  function currentContent() {
+    const lang = document.documentElement.lang;
+    return translations[lang] ?? translations.en;
+  }
+
+  function showStatus(message, kind) {
+    statusBox.hidden = false;
+    statusBox.textContent = message;
+    statusBox.dataset.kind = kind;
+  }
+
+  form.addEventListener("submit", () => {
+    pending = true;
+    const button = form.querySelector('button[type="submit"]');
+    const content = currentContent();
+
+    if (button) button.disabled = true;
+    showStatus(content.formSending, "sending");
+
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      if (!pending) return;
+      pending = false;
+      if (button) button.disabled = false;
+      showStatus(currentContent().formError, "error");
+    }, 9000);
+  });
+
+  iframe.addEventListener("load", () => {
+    if (!pending) return;
+    pending = false;
+    if (timer) clearTimeout(timer);
+
+    const button = form.querySelector('button[type="submit"]');
+    if (button) button.disabled = false;
+
+    showStatus(currentContent().formSuccess, "success");
+    setTimeout(() => {
+      const email = form.querySelector('input[name="email"]');
+      if (email) email.value = "";
+    }, 50);
+  });
+})();

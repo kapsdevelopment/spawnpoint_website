@@ -33,19 +33,24 @@
     />
     <title>Spawnpoint | Where did your story begin?</title>
     <link rel="canonical" href="https://spawnpoint.online/" />
+    <link rel="manifest" href="site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="assets/icons/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" sizes="180x180" />
+    <meta name="msapplication-TileImage" content="assets/icons/icon-512.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header" aria-label="Top menu" data-i18n-aria-label="headerLabel">
       <a class="brand" href="#top" aria-label="Spawnpoint home" data-i18n-aria-label="brandLabel">
-        <span class="brand-mark" aria-hidden="true">?</span>
+        <span class="brand-mark" aria-hidden="true">
+          <img src="assets/icons/icon-192.png" alt="" />
+        </span>
         <span>Spawnpoint</span>
       </a>
       <nav aria-label="Sections" data-i18n-aria-label="navLabel">
@@ -126,10 +131,8 @@
             pointing at a map and saying: that is where I started. This page is
             the project's first small basecamp while the app takes form.
           </p>
-          <div class="status-row" aria-label="Project status" data-i18n-aria-label="statusLabel">
-            <span data-i18n="statusDesign">Design direction</span>
-            <span data-i18n="statusPrototype">Prototype</span>
-            <span data-i18n="statusWaitlist">Waitlist</span>
+          <div class="status-row" aria-label="Waitlist" data-i18n-aria-label="statusLabel">
+            <a class="status-cta" href="#signup" data-i18n="statusWaitlist">Join the waitlist</a>
           </div>
         </div>
       </section>
@@ -139,17 +142,53 @@
           <p class="section-label" data-i18n="signupLabel">Sign up here</p>
           <h2 id="signup-title" data-i18n="signupTitle">Want to know when Spawnpoint opens?</h2>
           <p data-i18n="signupCopy">
-            The actual form comes next. For now, this space is reserved so the
-            design and message can settle before we connect the email flow.
+            Leave your email and I'll send the occasional update as the app takes shape.
           </p>
         </div>
-        <form class="signup-form" aria-label="Interest list coming soon" data-i18n-aria-label="formLabel">
+        <form
+          class="signup-form"
+          id="waitlist-form"
+          action="https://formcarry.com/s/arQi40sZeJz"
+          method="POST"
+          accept-charset="UTF-8"
+          target="formcarry_hidden_iframe"
+          aria-label="Interest list signup"
+          data-i18n-aria-label="formLabel"
+        >
+          <div
+            class="form-status"
+            id="form-status"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+          <iframe
+            class="form-frame"
+            id="formcarry_iframe"
+            name="formcarry_hidden_iframe"
+            title="Form submission"
+          ></iframe>
+          <img class="signup-logo" src="assets/icons/icon-192.png" alt="" aria-hidden="true" />
+          <input class="hp-field" type="text" name="company" tabindex="-1" autocomplete="off" />
+          <input class="hp-field" type="hidden" name="_gotcha" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_next" id="nextField" value="" />
+          <input type="hidden" name="form_name" value="spawnpoint_waitlist" />
+          <input type="hidden" name="project" value="Spawnpoint" />
+          <input type="hidden" name="product" value="Spawnpoint" />
+          <input type="hidden" name="source" value="spawnpoint_website" />
+          <input type="hidden" name="intent" value="waitlist" />
+          <input type="hidden" name="subject" value="Spawnpoint waitlist signup" />
+          <input type="hidden" name="message" value="Spawnpoint waitlist signup" />
+          <input type="hidden" name="tags" value="spawnpoint,waitlist,landing-page,coming-soon" />
+          <input type="hidden" name="landing_url" id="landingUrlField" value="" />
+          <input type="hidden" name="referrer" id="referrerField" value="" />
+          <input type="hidden" name="page_language" id="pageLanguageField" value="en" />
           <label for="email" data-i18n="emailLabel">Email</label>
           <div class="input-row">
-            <input id="email" type="email" placeholder="deg@example.com" disabled />
-            <button type="button" disabled data-i18n="formButton">Coming soon</button>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            <button type="submit" data-i18n="formButton">Join waitlist</button>
           </div>
-          <p data-i18n="formNote">No email is stored here yet.</p>
+          <p data-i18n="formNote">We'll only use your email for Spawnpoint updates.</p>
         </form>
       </section>
 
@@ -163,9 +202,16 @@
             <span data-i18n="phoneOneLabel">Map</span>
             <strong data-i18n="phoneComingSoon">Coming soon</strong>
           </article>
-          <article class="phone-mock">
+          <article class="phone-mock phone-mock--preview">
             <span data-i18n="phoneTwoLabel">Pin</span>
-            <strong data-i18n="phoneComingSoon">Coming soon</strong>
+            <div class="phone-preview">
+              <img
+                src="assets/images/spawnpoint-pin-preview.png"
+                alt="Red Spawnpoint pin centered on a voxel map"
+                data-i18n-alt="pinPreviewAlt"
+              />
+              <strong data-i18n="phoneComingSoon">Coming soon</strong>
+            </div>
           </article>
           <article class="phone-mock">
             <span data-i18n="phoneThreeLabel">Story</span>
@@ -182,11 +228,26 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Spawnpoint",
-        "url": "https://spawnpoint.online/",
-        "description": "Spawnpoint is an upcoming app for finding the exact place your story began.",
-        "inLanguage": ["en", "no"]
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://spawnpoint.online/#organization",
+            "name": "Spawnpoint",
+            "url": "https://spawnpoint.online/",
+            "logo": "https://spawnpoint.online/assets/icons/icon-512.png"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://spawnpoint.online/#website",
+            "name": "Spawnpoint",
+            "url": "https://spawnpoint.online/",
+            "description": "Spawnpoint is an upcoming app for finding the exact place your story began.",
+            "inLanguage": ["en", "no"],
+            "publisher": {
+              "@id": "https://spawnpoint.online/#organization"
+            }
+          }
+        ]
       }
     </script>
     <script src="script.js"></script>
