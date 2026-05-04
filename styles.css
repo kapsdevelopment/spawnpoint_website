@@ -421,9 +421,17 @@ section:not(.hero) {
   background: rgba(229, 56, 45, 0.12);
 }
 
-.form-frame,
-.hp-field {
+.form-frame {
   display: none;
+}
+
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .signup-logo {

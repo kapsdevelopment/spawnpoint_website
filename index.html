@@ -169,8 +169,16 @@
             title="Form submission"
           ></iframe>
           <img class="signup-logo" src="assets/icons/icon-192.png" alt="" aria-hidden="true" />
-          <input class="hp-field" type="text" name="company" tabindex="-1" autocomplete="off" />
-          <input class="hp-field" type="hidden" name="_gotcha" tabindex="-1" autocomplete="off" />
+          <input
+            class="hp-field"
+            type="text"
+            name="company"
+            data-spam-trap
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+          <input type="hidden" name="_gotcha" data-spam-trap value="" />
           <input type="hidden" name="_next" id="nextField" value="" />
           <input type="hidden" name="form_name" value="spawnpoint_waitlist" />
           <input type="hidden" name="project" value="Spawnpoint" />
@@ -185,7 +193,15 @@
           <input type="hidden" name="page_language" id="pageLanguageField" value="en" />
           <label for="email" data-i18n="emailLabel">Email</label>
           <div class="input-row">
-            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              inputmode="email"
+              maxlength="254"
+              placeholder="you@example.com"
+              required
+            />
             <button type="submit" data-i18n="formButton">Join waitlist</button>
           </div>
           <p data-i18n="formNote">We'll only use your email for Spawnpoint updates.</p>

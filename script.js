@@ -188,6 +188,7 @@ applyLanguage(initialLanguage);
   const nextField = document.getElementById("nextField");
   const landingUrlField = document.getElementById("landingUrlField");
   const referrerField = document.getElementById("referrerField");
+  const spamTrapFields = form ? [...form.querySelectorAll("[data-spam-trap]")] : [];
 
   if (!form || !iframe || !statusBox) return;
 
@@ -209,7 +210,15 @@ applyLanguage(initialLanguage);
     statusBox.dataset.kind = kind;
   }
 
-  form.addEventListener("submit", () => {
+  form.addEventListener("submit", (event) => {
+    const hasTriggeredTrap = spamTrapFields.some((field) => field.value.trim());
+
+    if (hasTriggeredTrap) {
+      event.preventDefault();
+      showStatus(currentContent().formSuccess, "success");
+      return;
+    }
+
     pending = true;
     const button = form.querySelector('button[type="submit"]');
     const content = currentContent();
