@@ -15,9 +15,7 @@ const translations = {
     heroKicker: "A tiny quest about where everything began",
     heroCopy:
       "Find the place where your story began. Not just the date. Not just the city. The exact point on the map.",
-    heroActionsLabel: "Primary actions",
     heroPrimary: "Sign up for updates",
-    heroSecondary: "See the idea",
     introLabel: "Spawn point intro",
     introTitle: "Everyone has a starting point.",
     introCopy:
@@ -74,9 +72,7 @@ const translations = {
     heroKicker: "En liten quest om hvor alt begynte",
     heroCopy:
       "Finn stedet der historien din startet. Ikke bare datoen. Ikke bare navnet på byen. Det faktiske punktet på kartet.",
-    heroActionsLabel: "Primære handlinger",
     heroPrimary: "Meld interesse",
-    heroSecondary: "Se ideen",
     introLabel: "Spawn point intro",
     introTitle: "Alle har et startpunkt.",
     introCopy:

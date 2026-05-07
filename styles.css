@@ -215,10 +215,11 @@ h3 {
 }
 
 h1 {
-  margin-bottom: 1rem;
+  margin-top: clamp(0.8rem, 2vw, 1.45rem);
+  margin-bottom: clamp(1.8rem, 4vw, 3rem);
   color: var(--paper);
   font-family: "Bungee", Impact, sans-serif;
-  font-size: clamp(4.2rem, 14vw, 10.5rem);
+  font-size: clamp(3.36rem, 11.2vw, 8.4rem);
   line-height: 0.9;
   letter-spacing: 0;
   text-shadow:
@@ -248,11 +249,14 @@ h3 {
   line-height: 1.55;
 }
 
-.hero-actions {
+.hero-lower {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  margin-top: 2rem;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.hero-lower .hero-copy {
+  margin-bottom: 0;
 }
 
 .button {
@@ -276,11 +280,6 @@ h3 {
 .button.primary {
   color: var(--ink);
   background: var(--gold);
-}
-
-.button.secondary {
-  background: rgba(255, 244, 223, 0.12);
-  backdrop-filter: blur(10px);
 }
 
 section:not(.hero) {
@@ -655,14 +654,14 @@ footer span {
 }
 
 @media (max-width: 560px) {
-  .hero-actions,
+  .hero-lower,
   .input-row,
   footer {
     align-items: stretch;
     grid-template-columns: 1fr;
   }
 
-  .hero-actions,
+  .hero-lower,
   footer {
     flex-direction: column;
   }
