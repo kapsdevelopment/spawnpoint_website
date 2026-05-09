@@ -54,6 +54,9 @@ const translations = {
     phoneComingSoon: "Coming soon",
     mapPreviewAlt: "Voxel-style forest map with roads and coastline",
     pinPreviewAlt: "Red Spawnpoint pin centered on a voxel map",
+    socialLinksLabel: "Social links",
+    instagramLabel: "Follow Spawnpoint on Instagram",
+    tiktokLabel: "Follow Spawnpoint on TikTok",
     footerTop: "Back to top",
   },
   no: {
@@ -113,6 +116,9 @@ const translations = {
     phoneComingSoon: "Kommer snart",
     mapPreviewAlt: "Voxel-aktig skogskart med veier og kystlinje",
     pinPreviewAlt: "Rød Spawnpoint-pin sentrert på et voxel-kart",
+    socialLinksLabel: "Sosiale lenker",
+    instagramLabel: "Følg Spawnpoint på Instagram",
+    tiktokLabel: "Følg Spawnpoint på TikTok",
     footerTop: "Til toppen",
   },
 };
