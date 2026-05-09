@@ -126,6 +126,8 @@ const translations = {
 const supportedLanguages = Object.keys(translations);
 const savedLanguage = getSavedLanguage();
 const initialLanguage = supportedLanguages.includes(savedLanguage) ? savedLanguage : "en";
+const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+const utmStorageKey = "spawnpoint-utm";
 
 function getSavedLanguage() {
   try {
@@ -141,6 +143,39 @@ function saveLanguage(language) {
   } catch {
     // The toggle should still work when storage is blocked.
   }
+}
+
+function readStoredUtm() {
+  try {
+    return JSON.parse(sessionStorage.getItem(utmStorageKey)) ?? {};
+  } catch {
+    return {};
+  }
+}
+
+function saveStoredUtm(values) {
+  try {
+    sessionStorage.setItem(utmStorageKey, JSON.stringify(values));
+  } catch {
+    // UTM capture still works for the current page when storage is blocked.
+  }
+}
+
+function getUtmValues() {
+  const params = new URLSearchParams(window.location.search);
+  const currentValues = Object.fromEntries(
+    utmKeys
+      .map((key) => [key, params.get(key)?.trim() ?? ""])
+      .filter(([, value]) => value)
+  );
+
+  if (Object.keys(currentValues).length > 0) {
+    const mergedValues = { ...readStoredUtm(), ...currentValues };
+    saveStoredUtm(mergedValues);
+    return mergedValues;
+  }
+
+  return readStoredUtm();
 }
 
 function applyLanguage(language) {
@@ -191,12 +226,17 @@ applyLanguage(initialLanguage);
   const landingUrlField = document.getElementById("landingUrlField");
   const referrerField = document.getElementById("referrerField");
   const spamTrapFields = form ? [...form.querySelectorAll("[data-spam-trap]")] : [];
+  const utmValues = getUtmValues();
 
   if (!form || !iframe || !statusBox) return;
 
   if (nextField) nextField.value = `${window.location.origin}${window.location.pathname}?sent=1#signup`;
   if (landingUrlField) landingUrlField.value = window.location.href;
   if (referrerField) referrerField.value = document.referrer || "direct";
+  utmKeys.forEach((key) => {
+    const field = form.querySelector(`input[name="${key}"]`);
+    if (field) field.value = utmValues[key] || "not_set";
+  });
 
   let pending = false;
   let timer = null;
